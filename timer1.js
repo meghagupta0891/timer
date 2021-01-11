@@ -1,7 +1,13 @@
 var timers = process.argv.slice(2);
-var sortedTimer = timers.sort();
-for(let i = 0 ; i < sortedTimer.length ; i++) {
-   setTimeout(function(){
+var sortedTimer = timers.filter(function(item) {
+    return (typeof parseInt(item) === "number")
+}).sort();
+var positiveNumbersOnly = sortedTimer.filter(function(item) {
+    return ( item >= 0)
+});
+console.log(positiveNumbersOnly);
+for(let i = 0 ; i < positiveNumbersOnly.length ; i++) {
+    setTimeout(function(){
        process.stdout.write('\x07');
-   },sortedTimer[i]*1000);
+    },positiveNumbersOnly[i]*1000);
 }
